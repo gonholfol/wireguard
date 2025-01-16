@@ -1,0 +1,15 @@
+[Unit]
+Description=WireGuard Web UI Backend
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/wireguard-web-ui
+ExecStart=/usr/bin/node --experimental-specifier-resolution=node --loader ts-node/esm server.ts
+Restart=always
+Environment=NODE_ENV=production
+Environment=PORT=3001
+
+[Install]
+WantedBy=multi-user.target 
