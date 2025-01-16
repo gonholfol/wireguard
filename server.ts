@@ -12,7 +12,7 @@ const port = process.env.PORT || 3001;
 // Настройка CORS для GitHub Pages
 const corsOptions = {
     origin: [
-        'https://your-username.github.io',
+        'https://gonholfol.github.io',
         'http://localhost:5173',
         'http://localhost:5174'
     ],
@@ -34,6 +34,15 @@ app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// Базовый маршрут для API
+app.get('/api', (req, res) => {
+    res.json({
+        message: 'WireGuard API работает',
+        version: '1.0.0',
+        timestamp: new Date().toISOString()
+    });
+});
+
 // Импортируем роутер динамически
 const importRouter = async () => {
     try {
@@ -42,6 +51,7 @@ const importRouter = async () => {
         
         app.listen(port, '0.0.0.0', () => {
             console.log(`Сервер запущен на порту ${port}`);
+            console.log(`API доступно по адресу: https://gonholfol.github.io/wireguard/api`);
         });
     } catch (error) {
         console.error('Ошибка при импорте роутера:', error);
